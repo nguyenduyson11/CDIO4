@@ -5,13 +5,11 @@ class MainController{
         house.find({},function(err,docs){
             if(!err){
                 // res.json(docs);
-                res.render('home',{docs});
+                return res.render('home',{docs});
                 console.log(docs);
-                return;
             }
-            res.send('loi roi');
+            return res.send('loi roi');
         });
-        res.render('home');
     }
     
 }

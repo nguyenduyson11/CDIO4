@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 
-router.get('/home',Auth.auth,(req,res)=>{
+router.get('/home',(req,res)=>{
     res.send('thành công');
 })
 

@@ -2,9 +2,24 @@ const User = require('../models/user');
 const Validation = require('../validation/validations');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const app = require('express');
-const passport  = require('passport');
+const {arraytoObject} = require('../../util/convertObject');
+const House = require('../models/houses');
 class SiteController{
+    index(req,res){
+        var home;
+         House.find({user:req.userid})
+         .then(data=>home=data)
+         .catch(err=>console.log(err))
+        User.findOne({_id:req.userid})
+        .then(user=>{
+            console.log(user);
+             res.render('sites/user',{
+                user:user.toObject(),
+                home:arraytoObject(home)
+            })
+        })
+        .catch(err=>res.send(err+"lỗi eooi"))
+    }
     login(req,res){
         res.render('sites/login');
     }
@@ -92,6 +107,11 @@ class SiteController{
         }
         
         
+    }
+    //get logout
+    logout(req,res){
+        res.clearCookie('userID');
+        res.redirect('/user/login');
     }
 } 
 

@@ -1,0 +1,57 @@
+<div class="container-admin">
+        {{> userMenu}}
+        <div class="user-content">
+            {{> userheader}}
+            <div class="user-content-table">
+                <div class="content-table-container">
+                    <h1 class="content-table-container-header">
+                        LIST PRODUCTS
+                    </h1>
+                    <div class="content-table-container-list">
+                        
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>STT</th>
+                                <th>Tên nhà</th>
+                                <th>Loại nhà</th>
+                                <th>Giá</th>
+                                <th colspan="2">ngày đăng</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {{#each home}}
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>{{this.name}}</td>
+                                        <td>{{this.giaban}}</td>
+                                        <td>@mdo</td>
+                                        <td>
+                                            <a href="#" type="button" class="btn btn-primary">sửa</a>
+                                            <a href="#" type="button" class="btn btn-danger">xóa</a>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                              
+                              
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const user_search_icon = document.querySelector('.menu-user-content-search i');
+        const user_closed_icon = document.querySelector('.menu-user-content-closed');
+        const user_input_search = document.querySelector('.menu-user-content-search input');
+        user_search_icon.addEventListener('click',(e)=>{
+            user_input_search.style.width = '250px';
+            user_closed_icon.style.display = 'block';
+        });
+        user_closed_icon.addEventListener('click',(e)=>{
+            user_input_search.style.width = '0px';
+            user_closed_icon.style.display = 'none';
+        });
+    </script>

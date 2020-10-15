@@ -12,7 +12,11 @@ module.exports.auth = function(req,res,next) {
                 return;
             };
             User.findOne({_id : decoded.userid})
-            .then(user=>next())
+            .then(user=>{ 
+                req.userid = user.id;
+                next();
+                
+            })
             .catch(err=>console.log(err))
         })
 
