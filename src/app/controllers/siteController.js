@@ -1,13 +1,35 @@
 const User = require('../models/user');
+const Home = require('../models/houses');
 const Validation = require('../validation/validations');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {arraytoObject} = require('../../util/convertObject');
-const House = require('../models/houses');
+const multer = require('multer');
+const Category = require('../models/category');
+
+//config upload files
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'src/public/upload');
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now()+'-'+ file.originalname  );
+    }
+  })
+var upload = multer({ 
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+        if(file.mimetype=="image/bmp" || file.mimetype=="image/png" || file.mimetype=="image/jpg" || file.mimetype=="image/jpeg" || file.mimetype=="image/gif"){
+            cb(null, true);  
+        }else{
+            return cb(new Error('Only image are allowed!'))
+        }
+    }
+}).array("fileupload",12)  
 class SiteController{
     index(req,res){
         var home;
-         House.find({user:req.userid})
+         Home.find({user:req.userid})
          .then(data=>home=data)
          .catch(err=>console.log(err))
         User.findOne({_id:req.userid})
@@ -59,7 +81,7 @@ class SiteController{
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(req.body.password, salt);
         //cretae user in database
-         const user = await new User({
+        const user = await new User({
             username:req.body.username,
             email:req.body.email,
             phone:req.body.phone,
@@ -108,6 +130,7 @@ class SiteController{
         
         
     }
+      
     //get logout
     logout(req,res){
         res.clearCookie('userID');

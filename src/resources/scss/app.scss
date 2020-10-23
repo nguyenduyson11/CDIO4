@@ -126,7 +126,7 @@ html,body{
 .menu-user-left{
     width: 300px;
     height: 100%;
-    box-shadow: 3px 3px 2px 0px #f9f9f9;
+    box-shadow: 0 0 15px 0 #D6D6D6;
 }
 .user-left-nav{
     height: 60px;
@@ -185,6 +185,7 @@ html,body{
 }
 .user-content{
     width: -webkit-calc(100% - 300px);
+    overflow: hidden;
 }
 .menu-user-content{
     height: 60px;
@@ -241,6 +242,7 @@ html,body{
     display: flex;
     justify-content: center;    
     align-items: center;
+    margin-left: 10px;
 }
 .content-table-container{
     width: 95%;
@@ -260,4 +262,14 @@ html,body{
     height: 5px;
     width: 150px;
     background-color: black;
+}
+//css add user
+.user-addHome{
+    width: 80%;
+    margin: 0 auto;
+    background-color:white;
+    // color:white;
+    box-shadow: 0 0 15px 0 #D6D6D6;
+    padding:20px 20px;
+    margin-top: 50px;
 }

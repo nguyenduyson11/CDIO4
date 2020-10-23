@@ -5,8 +5,8 @@ const router = express.Router();
 
 
 router.get('/home',(req,res)=>{
-    res.send('thành công');
-})
+    res.render('sites/addUser');
+});
 
 router.get('/',mainController.index);
 module.exports = router;
