@@ -5,7 +5,7 @@
             <div class="user-content-table">
                 <div class="content-table-container">
                     <h1 class="content-table-container-header">
-                        LIST PRODUCTS
+                        LIST User
                     </h1>
                     <div class="content-table-container-list">
                         
@@ -13,24 +13,23 @@
                             <thead>
                               <tr>
                                 <th>STT</th>
-                                <th>Tên nhà</th>
-                                <th>địa chỉ</th>
-                                <th>Giá</th>
-                                <th>ngày đăng</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>ngày tạo</th>
                                 <th colspan="2">ngày đăng</th>
                               </tr>
                             </thead>
                             <tbody>
-                                {{#each home}}
+                                {{#each listuser}}
                                     <tr>
                                         <th scope="row">{{index @index 1}}</th>
-                                        <td>{{this.name}}</td>
-                                        <td>{{this.adress}}</td>
-                                        <td>{{this.price}}</td>
-                                        <td>{{dateformat this.createdAt}}</td>
+                                        <td>{{this.username}}</td>
+                                        <td>{{this.email}}</td>
+                                        <td>{{this.phone}}</td>
+                                        <td>{{dateformat this.createAt}}</td>
                                         <td>
-                                            <a href="/user/edit-home/{{this._id}}" type="button" class="btn btn-primary">sửa</a>
-                                            <a href="/user/delete-home/{{this._id}}" type="button" class="btn btn-danger" data-idhome="{{this._id}}"  data-toggle="modal" data-target="#exampleModal">xóa</a>
+                                            <a href="#" type="button" class="btn btn-danger" data-iduser="{{this._id}}"  data-toggle="modal" data-target="#exampleModal">xóa</a>
                                         </td>
                                     </tr>
                                 {{/each}}
@@ -58,7 +57,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="btn-delete-home" type="button" class="btn btn-danger">Delete</button>
+                    <button id="btn-delete-user" type="button" class="btn btn-danger">Delete</button>
                 </div>
                 </div>
             </div>
@@ -78,15 +77,15 @@
         });
         document.addEventListener("DOMContentLoaded",()=>{
             var form = document.querySelector('#form-delete');
-            var btn = document.querySelector('#btn-delete-home');
-            var idhome ;
+            var btn = document.querySelector('#btn-delete-user');
+            var iduser ;
             $('#exampleModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) 
-            var id = button.data('idhome') 
-            idhome = id;
+            var id = button.data('iduser') 
+            iduser = id;
             })
             btn.addEventListener('click',(e)=>{
-                form.action = "/user/delete-home/"+idhome+"?_method=DELETE";
+                form.action = "user/admin/delete-user/"+iduser+"?_method=DELETE";
                 form.submit();
             })
             

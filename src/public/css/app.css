@@ -264,3 +264,7 @@ html, body {
   box-shadow: 0 0 15px 0 #D6D6D6;
   padding: 20px 20px;
   margin-top: 50px; }
+
+.edit-user {
+  width: 450px;
+  margin: 0 auto; }

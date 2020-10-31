@@ -8,6 +8,7 @@ const conectdb = require('./config/db/index');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
+var dateFormat = require('dateformat');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,7 +26,16 @@ app.engine('.hbs', exphbs(
     {
         extname: '.hbs',
         helpers: {
-            index : (a,b)=>a+b
+            index : (a,b)=>a+b,
+            admin:(user)=>{
+                if(user.permission==1)
+                    return true;
+                return false;   
+            },
+            dateformat:function(value) {
+                return dateFormat(value, "dd-mm-yyyy h:MM:ss TT"); 
+            }
+                
         }
     }
 ));

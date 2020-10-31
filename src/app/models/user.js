@@ -26,10 +26,11 @@ const user = new Schema({
         type:Number,
         default:0
     },
-    createAt:{
-        type:Date,
-        default:Date.now
+    image:{
+        type:String,
+        default:'https://loremflickr.com/50/50'
     }
-
+},{
+    timestamps:true
 });
 module.exports  = mongoose.model('User',user);

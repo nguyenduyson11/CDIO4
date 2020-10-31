@@ -22,7 +22,23 @@ router.get('/edit-home/:id',Auth.auth,homeController.updateHome);
 router.put('/edit-home/:id',Auth.auth,homeController.postUpdateHome);
 //delete home
 router.delete('/delete-home/:id',homeController.deleteHome);
+//get edit user
+router.get('/editUser/:id',Auth.auth,siteController.getEditUser)
+//post edit user
+router.put('/editUser/:id',Auth.auth,siteController.postEditUser)
 //get logout
+//get edit pasword
+router.get('/editpassword/:id',Auth.auth,siteController.getEditPassword)
+//put edit password
+router.put('/editpassword/:id',Auth.auth,siteController.putEditPassword)
+// admin get list user
+router.get('/admin/list-user',Auth.auth,siteController.getListUser)
+// admin delete list user
+router.delete('/admin/delete-user/:id',Auth.auth,siteController.deleteListUser)
+//get admin add category
+router.get('/admin/add-category',Auth.auth,siteController.getAddCategory)
+//post add adđ category
+router.post('/admin/add-category',Auth.auth,siteController.postAddCategory)
 router.get('/logout',siteController.logout);
 router.get('/',Auth.auth,siteController.index);
 
