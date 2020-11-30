@@ -25,7 +25,7 @@
                                     <tr>
                                         <th scope="row">{{index @index 1}}</th>
                                         <td>{{this.name}}</td>
-                                        <td>{{this.adress}}</td>
+                                        <td>{{this.adress.street}}</td>
                                         <td>{{this.price}}</td>
                                         <td>{{dateformat this.createdAt}}</td>
                                         <td>
@@ -90,5 +90,5 @@
                 form.submit();
             })
             
-        })
+        });
     </script>

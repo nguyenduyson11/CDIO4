@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const {arraytoObject} = require('../../util/convertObject');
 const multer = require('multer');
 const Category = require('../models/category');
+const request = require('request');
 //config upload files
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -46,24 +47,49 @@ class HomeController{
             } else if (err) {
               console.log("An unknown error occurred when uploading." + err);
             }else{
-                // res.json(req.files[0].filename);
-               const arrfile = req.files;
-               const images =  arrfile.map((image)=>{
-                    return image.filename;
-                });
-                const home = new Home({
-                    name:req.body.nameHome,
-                    category:req.body.category,
-                    adress:req.body.adress,
-                    acreage:req.body.acreage,
-                    description:req.body.description,
-                    price:req.body.price,
-                    image:images,
-                    user:req.userid
+                var lat=1;
+                var long =1;
+                let myAdress = `${req.body.adress},${req.body.area}`;
+                let encodeString = encodeURIComponent(myAdress);
+                console.log(myAdress);
+                const url  = `https://api.opencagedata.com/geocode/v1/json?q=${encodeString}&key=f83ea3d8638a4421ac6581cecf878d4d&pretty=1`;
+                request({url:url,json:true},(err,response)=>{
+                    var data = response.body;
+                    
+                    lat = data.results[0].geometry.lat;
+                    long = data.results[0].geometry.lng;
+                    //  res.json(req.files[0].filename);
+                    const arrfile = req.files;
+                    const images =  arrfile.map((image)=>{
+                            return image.filename;
+                    });
+                    const home = new Home({
+                        name:req.body.nameHome,
+                        category:req.body.category,
+                        adress:{
+                            street:req.body.adress,
+                            city:req.body.area,
+                            geo:{
+                                lat:lat,
+                                lng:long
+                            }
+                        },
+                        acreage:Number(req.body.acreage),
+                        description:req.body.description,
+                        price:req.body.price,
+                        image:images,
+                        user:req.userid,
+                        room:{
+                            bedroom:Number(req.body.bedroom),
+                            livingroom:Number(req.body.livingroom),
+                            bathroom:Number(req.body.bathroom)
+                        }
+                    })
+                    home.save()
+                    .then(home=> {return res.redirect('/user')})
+                    .catch(err=>{return res.send("loi roi")});
                 })
-               home.save()
-               .then(home=> {return res.redirect('/user')})
-               .catch(err=>{return res.send("loi roi")});
+               
             }
         })
     }
@@ -106,38 +132,78 @@ class HomeController{
             } else if (err) {
               console.log("An unknown error occurred when uploading." + err);
             }else{
-               let home;
+                var lat=1;
+                var long =1;
+                let myAdress = `${req.body.adress},${req.body.area}`;
+                let encodeString = encodeURIComponent(myAdress);
+                const url  = `https://api.opencagedata.com/geocode/v1/json?q=${encodeString}&key=f83ea3d8638a4421ac6581cecf878d4d&pretty=1`;
                const arrfile = req.files;
                const images =  arrfile.map((image)=>{
                     return image.filename;
                 });
-                console.log(images.length);
-                if(images.length>0){
-                        Home.updateOne({_id:req.params.id},{
-                        name:req.body.nameHome,
-                        category:req.body.category,
-                        adress:req.body.adress,
-                        acreage:req.body.acreage,
-                        description:req.body.description,
-                        price:req.body.price,
-                        image:images,
-                    })
-                    .then(home=> {return res.redirect('/user')})
-                    .catch(err=>{return res.send("loi roi")});
-                }
-                else{
-                        Home.updateOne({_id:req.params.id},{
-                        name:req.body.nameHome,
-                        category:req.body.category,
-                        adress:req.body.adress,
-                        acreage:req.body.acreage,
-                        description:req.body.description,
-                        price:req.body.price,
-                    })
-                    .then(home=> {return res.redirect('/user')})
-                    .catch(err=>{return res.send("loi roi")});
-                }
                 
+                request({url:url,json:true},(err,response)=>{
+                    var data = response.body;
+                    
+                    lat = data.results[0].geometry.lat;
+                    long = data.results[0].geometry.lng;
+                    const arrfile = req.files;
+                    const images =  arrfile.map((image)=>{
+                            return image.filename;
+                    });
+                    if(images.length>0)
+                    {
+                            Home.updateOne({_id:req.params.id},{
+                            name:req.body.nameHome,
+                            category:req.body.category,
+                            adress:{
+                                street:req.body.adress,
+                                city:req.body.area,
+                                geo:{
+                                    lat:lat,
+                                    lng:long
+                                }
+                            },
+                            room:{
+                                bedroom:Number(req.body.bedroom),
+                                livingroom:Number(req.body.livingroom),
+                                bathroom:Number(req.body.bathroom)
+                            },
+                            acreage:Number(req.body.acreage),
+                            description:req.body.description,
+                            price:req.body.price,
+                            image:images,
+                        })
+                        .then(home=> {return res.redirect('/user')})
+                        .catch(err=>{return res.send("loi roi")});
+                    }
+                    else{
+                        Home.updateOne({_id:req.params.id},{
+                            name:req.body.nameHome,
+                            category:req.body.category,
+                            adress:{
+                                street:req.body.adress,
+                                city:req.body.area,
+                                geo:{
+                                    lat:lat,
+                                    lng:long
+                                }
+                            },
+                            room:{
+                                bedroom:Number(req.body.bedroom),
+                                livingroom:Number(req.body.livingroom),
+                                bathroom:Number(req.body.bathroom)
+                            },
+                            acreage:Number(req.body.acreage),
+                            description:req.body.description,
+                            price:req.body.price,
+                        })
+                        .then(home=> {return res.redirect('/user')})
+                        .catch(err=>{return res.send("loi roi")});   
+                        
+                    }
+                    
+                })
             }
         })
     }

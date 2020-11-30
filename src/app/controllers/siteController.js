@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const {arraytoObject} = require('../../util/convertObject');
 const multer = require('multer');
 const category = require('../models/category');
-
+const Vote = require('../models/Vote');
 //config upload files
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -284,6 +284,29 @@ class SiteController{
     logout(req,res){
         res.clearCookie('userID');
         res.redirect('/user/login');
+    }
+    // getStatistical
+    getStatistical(req,res){
+        User.findById(req.userid,(err,docs)=>{
+            if(err)
+                res.send("lỗi rồi");
+            else{
+                
+                res.render("sites/statistical",{
+                    user:docs.toObject(),
+                })
+            }    
+        }) 
+        
+    }
+    //get vote area
+    getVote(req,res){
+        Vote.find().then(votes=>{
+            res.json({
+                success:true,
+                votes:votes
+            })
+        })
     }
     
 } 

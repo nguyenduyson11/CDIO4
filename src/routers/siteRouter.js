@@ -39,6 +39,10 @@ router.delete('/admin/delete-user/:id',Auth.auth,siteController.deleteListUser)
 router.get('/admin/add-category',Auth.auth,siteController.getAddCategory)
 //post add adđ category
 router.post('/admin/add-category',Auth.auth,siteController.postAddCategory)
+//get chartjs
+router.get('/statistical',Auth.auth,siteController.getStatistical)
+//get vote
+router.get('/vote',Auth.auth,siteController.getVote)
 router.get('/logout',siteController.logout);
 router.get('/',Auth.auth,siteController.index);
 

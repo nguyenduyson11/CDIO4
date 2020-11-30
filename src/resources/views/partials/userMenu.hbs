@@ -1,7 +1,9 @@
 <div class="menu-user-left">
             <div class="user-left-nav">
                 <div class="user-left-nav-name">
-                    <img class="user-left-nav-img" src="/upload/{{user.image}}" style="width: 50px; height: 50px;" />
+                  <a href="/user/editUser/{{user._id}}">
+                        <img class="user-left-nav-img" src="/upload/{{user.image}}" style="width: 50px; height: 50px;" />
+                  </a>
                     <span>{{user.username}}</span>
                 </div>
                 <i class="fas fa-bars icon-navbar"></i> 
@@ -35,7 +37,7 @@
                     <i class="fas fa-file-alt left-item-user"></i>
                     <span>Thêm mới sản phẩm</span>
                 </a>
-                <a href="#" class="user-left-item">
+                <a href="/user/statistical" class="user-left-item">
                     <i class="fas fa-chart-pie left-item-user"></i>
                     <span>Thống kê </span>
                 </a>
@@ -53,7 +55,7 @@
                     <i class="far fa-list-alt left-item-user"></i>
                     <span>Quản lý danh mục</span>
                 </a>
-                <a href="#" class="user-left-item">
+                <a href="/user/statistical" class="user-left-item">
                     <i class="fas fa-chart-pie left-item-user"></i>
                     <span>Thống kê </span>
                 </a>

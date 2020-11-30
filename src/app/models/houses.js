@@ -1,3 +1,4 @@
+const { bool, boolean, object } = require('@hapi/joi');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -12,7 +13,7 @@ const house = new Schema({
         required:true,
     },
     adress:{
-        type:String,
+        type:Object,
         require:true
     },
     acreage:{
@@ -34,6 +35,14 @@ const house = new Schema({
     user:{
         type:Schema.Types.ObjectId,
         require:true
+    },
+    room:{
+        type:Object
+    },
+    active:{
+         type: Boolean,
+         default: false
+
     }
 },{
     timestamps:true,
