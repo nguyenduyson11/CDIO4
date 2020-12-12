@@ -157,9 +157,10 @@ class SiteController{
             } else if (err) {
               console.log("An unknown error occurred when uploading." + err);
             }else{
-               const arrfile = req.file.filename;
+               
                 console.log(req.file);
                 if(req.file){
+                    const arrfile = req.file.filename;
                     User.updateOne({_id:req.params.id},{
                     username:req.body.username,
                     phone:req.body.phone,

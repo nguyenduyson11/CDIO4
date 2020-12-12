@@ -63,11 +63,15 @@ class HomeController{
                     const images =  arrfile.map((image)=>{
                             return image.filename;
                     });
-                    const home = new Home({
+                    console.log(images);
+                    if(images.length>0){
+                        
+                        const home = new Home({
                         name:req.body.nameHome,
                         category:req.body.category,
                         adress:{
                             street:req.body.adress,
+                            district:req.body.district,
                             city:req.body.area,
                             geo:{
                                 lat:lat,
@@ -88,6 +92,36 @@ class HomeController{
                     home.save()
                     .then(home=> {return res.redirect('/user')})
                     .catch(err=>{return res.send("loi roi")});
+                    }
+                    else{
+                        const home = new Home({
+                            name:req.body.nameHome,
+                            category:req.body.category,
+                            adress:{
+                                street:req.body.adress,
+                                district:req.body.district,
+                                city:req.body.area,
+                                geo:{
+                                    lat:lat,
+                                    lng:long
+                                }
+                            },
+                            acreage:Number(req.body.acreage),
+                            description:req.body.description,
+                            price:req.body.price,
+                            image:[],
+                            user:req.userid,
+                            room:{
+                                bedroom:Number(req.body.bedroom),
+                                livingroom:Number(req.body.livingroom),
+                                bathroom:Number(req.body.bathroom)
+                            }
+                        })
+                        home.save()
+                        .then(home=> {return res.redirect('/user')})
+                        .catch(err=>{return res.send("loi roi")});
+
+                    }
                 })
                
             }
@@ -158,6 +192,7 @@ class HomeController{
                             category:req.body.category,
                             adress:{
                                 street:req.body.adress,
+                                district:req.body.district,
                                 city:req.body.area,
                                 geo:{
                                     lat:lat,
@@ -183,6 +218,7 @@ class HomeController{
                             category:req.body.category,
                             adress:{
                                 street:req.body.adress,
+                                district:req.body.district,
                                 city:req.body.area,
                                 geo:{
                                     lat:lat,
@@ -211,6 +247,47 @@ class HomeController{
         Home.deleteOne({_id:req.params.id})
         .then(home=>{return res.redirect('/user')})
         .catch(err=>{console.log(err)})
+    }
+    //get all home
+    async getAllHome(req,res){
+        const page = (req.query.page)?parseInt(req.query.page):1; 
+        const limit = 9;
+        const startIndex = (page - 1) * limit;
+        const listhome = await Home.find().limit(limit).skip(startIndex).exec();
+        const user = await User.findById(req.userid);
+        const categories = await Category.find({});
+        if(listhome){
+            if(categories){
+                res.render('home/viewHome',{
+                    listhome:arraytoObject(listhome),
+                    user:user,
+                    categories:arraytoObject(categories)
+                })
+            }
+            
+        }
+        return;
+        
+    }
+    //get all home sort
+    async getHomeSort(req,res){
+        const page = (req.query.page)?parseInt(req.query.page):1; 
+        const limit = 9;
+        const startIndex = (page - 1) * limit;
+        const listhome = await Home.find().limit(limit).skip(startIndex).exec();
+        const user = await User.findById(req.userid);
+        const categories = await Category.find({});
+        if(listhome){
+            if(categories){
+                res.json({
+                    listhome:arraytoObject(listhome),
+                    user:user,
+                    categories:arraytoObject(categories)
+                })
+            }
+            
+        }
+        return;
     }
 }
 

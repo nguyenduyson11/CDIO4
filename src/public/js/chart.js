@@ -9,10 +9,12 @@ fetch('http://localhost:3000/user/vote')
     ((acc[vote.area]=(acc[vote.area] || 0)+ parseInt(vote.points)),acc),{});
 
     let dataPoint = [ // tạo dữ liệu mẫu
-        {label:'Đà Nẵng',y: voteCount['Đà Nẵng']},
-        {label:'Huế',y: voteCount['Huế']},
-        {label:'Tp.Hồ Chí Minh',y: voteCount['Tp.Hồ Chí Minh']},
-        {label:'Hà Nội',y: voteCount['Hà Nội']},
+        {label:'Hải Châu',y: voteCount['Hải Châu']},
+        {label:'Thanh Khê',y: voteCount['Thanh Khê']},
+        {label:'Ngũ Hành Sơn',y: voteCount['Ngũ Hành Sơn']},
+        {label:'Cẩm Lệ',y: voteCount['Cẩm Lệ']},
+        {label:'Hòa Vang',y: voteCount['Hòa Vang']},
+        {label:'Liên Chiểu',y: voteCount['Liên Chiểu']},
     ]
     const chartContainer1 = document.querySelector('#chartContainer1');
     const chartContainer2 = document.querySelector('#chartContainer2');// vẽ biểu đồ chartjs bằng canvas

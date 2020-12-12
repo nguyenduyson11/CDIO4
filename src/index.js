@@ -34,8 +34,16 @@ app.engine('.hbs', exphbs(
             },
             dateformat:function(value) {
                 return dateFormat(value, "dd-mm-yyyy h:MM:ss TT"); 
-            }
-                
+            },
+            isShowimg:(index)=>{
+
+                if(parseInt(index)>0)
+                    return '';
+                return 'active';    
+            },
+            ischeckImg:(value)=>{
+                return(value)?`/upload/${value}`:'https://loremflickr.com/320/240' 
+            }  
         }
     }
 ));
