@@ -281,8 +281,8 @@ class HomeController{
             if(categories){
                 res.json({
                     listhome:arraytoObject(listhome),
-                    user:user,
-                    categories:arraytoObject(categories)
+                    // user:user,
+                    // categories:arraytoObject(categories)
                 })
             }
             
