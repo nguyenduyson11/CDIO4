@@ -1,11 +1,12 @@
+
 <div class="menu">
     <div class="menutren">
         <nav class="navbar navbar-expand-lg navbar-light ">
             <a class="navbar-brand dropdown-0-0 " href="#">Land</a>
-            <form class="form-inline   ">
-                <input class="form-control dropdown-0" type="search" placeholder="Hải Châu,Thanh Khê..."
+            <form class="form-inline " action="/product">
+                <input class="form-control dropdown-0" type="search" required name="search" placeholder="Hải Châu,Thanh Khê..."
                     aria-label="Search">
-                <button class="btn btn-outline-success " type="submit">Tìm Kiếm</button>
+                <button class="btn btn-outline-success btn-search-home " type="submit">Tìm Kiếm</button>
             </form>
             <button class="navbar-toggler dro " type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -16,19 +17,19 @@
             <div class="collapse navbar-collapse dropdown-0-1" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown-1 color-itme">
-                        <a class="nav-link nav-link_item " href="#" id="navbarDropdown">
+                        <a class="nav-link nav-link_item " href="/product" id="navbarDropdown">
                             <span>Mua</span>
                         </a>
 
                     </li>
                     <li class="nav-item dropdown-1">
-                        <a class="nav-link nav-link_item " href="#" id="navbarDropdown">
+                        <a class="nav-link nav-link_item " href="/user/add-home" id="navbarDropdown">
                             <span>Bán</span>
                         </a>
 
                     </li>
                     <li class="nav-item dropdown-1 ">
-                        <a class="nav-link nav-link_item " href="#" id="navbarDropdown">
+                        <a class="nav-link nav-link_item " href="/user/add-home" id="navbarDropdown">
                             <span>Cho thuê</span>
                         </a>
 
@@ -101,7 +102,7 @@
                             <div class="col-lg-8 col-md-12 col8">
                                 <div class="tieudeduoi-1">
                                     <h6>
-                                        23 kết quả đang chờ bạn
+                                        {{count}} kết quả đang chờ bạn
                                     </h6>
                                 </div>
                             </div>
@@ -114,17 +115,12 @@
                                     </button>
                                     <div class="dropdown-menu tieudeduoi-2-2" aria-labelledby="btnGroupDrop1">
                                         <div class="item-1">
-                                            <a href="/product/sort">Giá cao đến thấp</a>
+                                            <a data-type="desc" href="/product/sort">Giá cao đến thấp</a>
                                         </div>
                                         <div class="item-1">
-                                            <a href="/product/sort">Giá thấp đến cao</a>
+                                            <a data-type="asc" href="/product/sort">Giá thấp đến cao</a>
                                         </div>
-                                        <div class="item-1">
-                                            <a href="/product/sort">Diện tích cao đến thấp</a>
-                                        </div>
-                                        <div class="item-1">
-                                            <a href="/product/sort">Diện tích thấp đến cao</a>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +139,7 @@
                             <input type="hidden" name="location" data-lat="{{this.adress.geo.lat}} "
                                 data-long="{{this.adress.geo.lng}}" data-street="{{this.adress.street}} "
                                 data-image="{{this.image}}">
-                            <a href="/product/:{{this._id}}/detail" class="block-img">
+                            <a href="/product/{{this._id}}/detail" class="block-img">
                                 <div class="block-img">
                                     <div id="s{{index @index 1}}" class="carousel slide" data-ride="carousel">
                                         <ol class="carousel-indicators">
@@ -259,9 +255,23 @@
 
 
         </div>
-        <div class="cuoitrang-1">
-            <button type="button" class="btn btn-9 ">1</button>
-            <p>1-20 of 20 Results</p>
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="cuoitrang-1">
+                    <div class="group-btn-page">
+                        <button id="btn-pre-Page" data-page="{{result.previous.pagePre}}" type="button" class=" btn-9 ">
+                            <i data-page="{{result.previous.pagePre}}" class="fas fa-arrow-left"></i>
+                            </button>
+                        <button data-page="1" type="button" class=" btn-9 ">1</button>
+                        <button data-page="2" type="button" class=" btn-9 ">2</button>
+                        <span>...</span>
+                        <button data-page="3" type="button" class=" btn-9 ">3</button>
+                        <button id="btn-next-Page" data-page="{{result.next.pageNext}}" type="button" class=" btn-9 ">
+                            <i id="btn-i-Page" data-page="{{result.next.pageNext}}" class="fas fa-arrow-right btn-next"></i>
+                        </button>
+                    </div>
+                 </div>
+            </div>
         </div>
         <div class="cuoitrang-2">
             <a href="">United States</a>
@@ -904,6 +914,11 @@
 
 
         });
+
+        const containerHome = $('#home-product-container');
+        const listbtnPage = $('.btn-9');
+       
+
         var modalbtn = document.querySelector('.modal-btn-20');
         var modalbg = document.querySelector('.modal-bg-1');
         var modalclose = document.querySelector('.modal-close-1');
@@ -927,70 +942,46 @@
             accessToken: 'your.mapbox.access.token'
         }).addTo(mymap);
         const listInput = $('input[type="hidden"]')
-
         function renderMap(){
-            for (let i = 0; i < listInput.length; i++) {
-            var home = listInput[i].getAttribute('data-image');
-            var image = home.split(',', 1)
-            var marker = L.marker([listInput[i].getAttribute('data-lat'), listInput[i].getAttribute('data-long')]).addTo(mymap).bindPopup(`
-            <div class="map_market">
-                <div class="map_market-img">
-                    <img src="/upload/${image[0]}" alt="" >
-                </div>
-                <span class="map_market-text">
-                    ${listInput[i].getAttribute('data-street')}
-                </span>
-            </div>`);
+            
+            for (let i = 0; i < listInput.length; i++) 
+            {
+                var home = listInput[i].getAttribute('data-image');
+                var image = home.split(',', 1)
+                var marker = L.marker([listInput[i].getAttribute('data-lat'), listInput[i].getAttribute('data-long')]).addTo(mymap).bindPopup(`
+                    <div class="map_market">
+                        <div class="map_market-img">
+                            <img src="/upload/${image[0]}" alt="" >
+                        </div>
+                        <span class="map_market-text">
+                            ${listInput[i].getAttribute('data-street')}
+                        </span>
+                    </div>`);
+            }
         }
-        }
+        //set content search room
         renderMap();
         $('.item-room').click((e) => {
             e.preventDefault();
             $('.room-number').text(e.target.innerText);
         })
-        // ajax
-        const containerHome = $('#home-product-container');
-        console.log(containerHome);
-        $('.item-room').on('click', function (e) {
-            let room = 1;
-            switch (e.target.innerText) {
-                case '2+':
-                    room = 2;
-                    break;
-                case '3+':
-                    room = 3;
-                    break;
-                case '4+':
-                    room = 4;
-                    break;
-
-            }
-            
-            setTimeout(()=>{
-                console.log('111')
-                $('.loading-product').removeClass('active-loading-product');
-            },800);
-            $.ajax({
-                url: '/product/sort',
-                success: function (product) {
-                    let idSlide = 1;
-                    let html = '';
-                    const listhome = product.listhome;
-                    const result = listhome.filter((data) => {
-                        return data.room.bedroom >= room;
-                    })
-                    html = result.map((home) => {
+        //render product sorted
+       function renderHomeSort(result){
+            let html ='';
+            let idSlide = 1;          
+            html = result.map((home) => {
+                        idSlide++;
                         return `<div class="col-lg-4 col-md-6 col-sm-12 ">
                                 <div class="khoi">
                                     <input type="hidden" name="location" data-lat="${home.adress.geo.lat} " data-long="${home.adress.geo.lng}"
                                     data-street="${home.adress.street} "data-image ="${home.image[0]}">
-                                <a href="/product/:${home._id}/detail" class="block-img">
+                                <a href="/product/${home._id}/detail" class="block-img">
                                     <div class="block-img">
-                                        <div id="${idSlide++}" class="carousel slide" data-ride="carousel">
+                                        <div id="s${idSlide}" class="carousel slide" data-ride="carousel">
                                             <ol class="carousel-indicators">
-                                                <li data-target="#${idSlide++}" data-slide-to="0" class="active"></li>
-                                                <li data-target="#s${idSlide++}" data-slide-to="1"></li>
-                                                <li data-target="#s${idSlide++}" data-slide-to="2"></li>
+                                                <li data-target="#s${idSlide}" data-slide-to="0" class="active"></li>
+                                                <li data-target="#s${idSlide}" data-slide-to="1"></li>
+                                                <li data-target="#s${idSlide}" data-slide-to="2"></li>
                                             </ol>
                                             <div class="carousel-inner" role="listbox">
                                                 
@@ -1005,11 +996,11 @@
                                                         </div>
                                                 
                                             </div>
-                                            <a class="carousel-control-prev" href="#s${idSlide++}" role="button" data-slide="prev">
+                                            <a class="carousel-control-prev" href="#s${idSlide}" role="button" data-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
-                                            <a class="carousel-control-next" href="#s${idSlide++}" role="button" data-slide="next">
+                                            <a class="carousel-control-next" href="#s${idSlide}" role="button" data-slide="next">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Next</span>
                                             </a>
@@ -1036,23 +1027,125 @@
                                 </div>
                             </div>
 
-                   `
-
+                   `;
                     })
-                    console.log(html);
-                    containerHome.html(html.concat(`<div class="loading-product active-loading-product">
+            containerHome.html(html.concat(`<div class="loading-product active-loading-product">
                        <div class="loading-icon">
                             <span>loading</span>
                        </div>
-                    </div>`));
-                    renderMap();
-                    idSlide = 1;
+                    </div>`));    
+        }  
+        // ajax 
+        function ajax(value=1,page=1,type){
+            $.ajax({
+                url: `/product/sort?page=${page}`,
+                success: function (product) {
+                   if(product.result.previous){
+                       $('#btn-pre-Page').attr('data-page',product.result.previous.pagePre)
+                   }
+                   if(product.result.nextPage){
+                       $('#btn-pre-Page').attr('data-page',product.result.nextPage.pagePre)
+                   } 
+                     const listhome = product.listhome;
+                    if(type ==='category'){
+                         const result = listhome.filter((data) => {
+                            return data.category == value;
+                        });
+                        console.log(result);
+                        renderHomeSort(result);
+                    }
+                    else if(type === 'asc'){
+                        listhome.sort((a,b) => {
+                            return a.price - b.price;
+                        });
+                        renderHomeSort(listhome);
+                    }
+                    else if(type === 'desc'){
+                        listhome.sort((a,b) => {
+                            return b.price - a.price;
+                        });
+                        renderHomeSort(listhome);
+                    }
+                    else{
+                        
+                        const result = listhome.filter((data) => {
+                            return data.room.bedroom >= value;
+                        });
+                        renderHomeSort(result);
+                        
+                    }
+                    
                 }
             })
+        }
+        //hàm lọc số phòng
+        function slectRoom(){
+            $('.item-room').on('click', function (e) {
+                let room = 1;
+                switch (e.target.innerText) {
+                    case '2+':
+                        room = 2;
+                        break;
+                    case '3+':
+                        room = 3;
+                        break;
+                    case '4+':
+                        room = 4;
+                        break;
 
-        });
-    });
+                } 
+                setTimeout(()=>{
+                    $('.loading-product').removeClass('active-loading-product');
+                },800);
+                ajax(room,1);
+            });
+        }
+        const listItem_Sort = $('.item-1>a');
+        console.log(listItem_Sort);
+        //hàm sắp xếp nhà theo giá
+        function selectSortPrice(){
+            listItem_Sort.on('click',(e)=>{
+                e.preventDefault();
+                 setTimeout(()=>{
+                    $('.loading-product').removeClass('active-loading-product');
+                },800);
+                const sort_type = e.target.getAttribute('data-type');
+                 ajax(1,1,sort_type)
+            })
+        }
+        selectSortPrice();
+        //hàm chọn loại nhà
+        function selectCategory(){
+           const listChecked =  $('.form-check-input1');
+           listChecked.on('click ',(e)=>{
+              if(e.target.checked){
+                  const value  = e.target.getAttribute('value');
+                  setTimeout(()=>{
+                    $('.loading-product').removeClass('active-loading-product');
+                    },800);
+                  ajax(value,1,'category')
+              }
 
+           })
+        }        
+        //hàm phân trang
+        function pagination(){
+            for(let i=0;i<listbtnPage.length;i++){
+            listbtnPage[i].addEventListener('click',(e)=>{
+                if(e.target.getAttribute('data-page')!=''){
+                    setTimeout(()=>{
+                        $('.loading-product').removeClass('active-loading-product');
+                    },800);
+                    ajax(1,parseInt(e.target.getAttribute('data-page')));
+                }
+            })
+            }
+            
+        }
+        slectRoom();
+        selectCategory()  
+        pagination();
+});
 
 
 </script>

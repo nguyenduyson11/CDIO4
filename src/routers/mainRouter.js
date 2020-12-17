@@ -12,7 +12,8 @@ router.get('/home',(req,res)=>{
 router.get('/product/sort',homeController.getHomeSort);
 //get all homes
 router.get('/product',homeController.getAllHome);
-
+//get hoem detail
+router.get('/product/:id/detail',homeController.getHomeDetail);
 router.get('/',mainController.index);
 module.exports = router;
 

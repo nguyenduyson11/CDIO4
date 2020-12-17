@@ -43,6 +43,9 @@ app.engine('.hbs', exphbs(
             },
             ischeckImg:(value)=>{
                 return(value)?`/upload/${value}`:'https://loremflickr.com/320/240' 
+            },
+            firtimage(value){
+                return value.image[0];
             }  
         }
     }

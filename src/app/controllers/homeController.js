@@ -250,18 +250,44 @@ class HomeController{
     }
     //get all home
     async getAllHome(req,res){
-        const page = (req.query.page)?parseInt(req.query.page):1; 
+        const page = (req.query.page)?parseInt(req.query.page):1;
+        const valueSearch = req.query.search;
+        
         const limit = 9;
         const startIndex = (page - 1) * limit;
-        const listhome = await Home.find().limit(limit).skip(startIndex).exec();
+        const endIndex = page * limit;
+        let listhome = await Home.find().limit(limit).skip(startIndex).exec();
+        if(valueSearch && valueSearch.length>0){
+                listhome = listhome.filter((data)=>{
+                const district = data.adress.district.toLocaleLowerCase().replace(/\s/g, '');
+                const value = valueSearch.toLocaleLowerCase().replace(/\s/g, '');
+                return district.includes(value);
+            })
+           
+        }
         const user = await User.findById(req.userid);
         const categories = await Category.find({});
+        const result ={};
+        if(startIndex > 0){
+            result.previous = {
+                pagePre:page + 1,
+                limit:limit
+            }
+        }
+        if(endIndex < await Home.countDocuments().exec()){
+            result.next = {
+                pageNext:page + 1,
+                limit:limit
+            }
+        }
         if(listhome){
             if(categories){
                 res.render('home/viewHome',{
                     listhome:arraytoObject(listhome),
                     user:user,
-                    categories:arraytoObject(categories)
+                    categories:arraytoObject(categories),
+                    result:result,
+                    count: await Home.countDocuments().exec()
                 })
             }
             
@@ -274,20 +300,51 @@ class HomeController{
         const page = (req.query.page)?parseInt(req.query.page):1; 
         const limit = 9;
         const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
         const listhome = await Home.find().limit(limit).skip(startIndex).exec();
-        const user = await User.findById(req.userid);
         const categories = await Category.find({});
+        const result ={};
+        if(startIndex > 0){
+            result.previous = {
+                pagePre:page-1,
+                limit:limit
+            }
+        }
+        if(endIndex < await Home.countDocuments().exec()){
+            result.next = {
+                pageNext:page+1,
+                limit:limit
+            }
+        }
+        
         if(listhome){
             if(categories){
                 res.json({
                     listhome:arraytoObject(listhome),
-                    // user:user,
-                    // categories:arraytoObject(categories)
+                    result:result,
+                    categories:arraytoObject(categories),
+                    count: await Home.countDocuments().exec()
                 })
             }
             
         }
         return;
+    }
+    async getHomeDetail(req,res){
+        const home_id = req.params.id;
+        const listhomenew = await Home.find().sort({
+            createdAt:-1
+        });
+        const listhome =  await Home.find();
+        console.log(listhome)
+        const home_detail = await Home.findById(home_id)
+        if(home_detail){
+            res.render('home/homeDetail',{
+                home:home_detail.toObject(),
+                listHomeNew:arraytoObject(listhomenew),
+                listhome:arraytoObject(listhome)
+            });
+        }
     }
 }
 
