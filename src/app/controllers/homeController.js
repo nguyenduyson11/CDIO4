@@ -263,25 +263,26 @@ class HomeController{
     async getAllHome(req,res){
         const page = (req.query.page)?parseInt(req.query.page):1;
         const valueSearch = req.query.search;
-        
         const limit = 9;
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
         let listhome = await Home.find().limit(limit).skip(startIndex).exec();
         if(valueSearch && valueSearch.length>0){
-                listhome = listhome.filter((data)=>{
-                const district = data.adress.district.toLocaleLowerCase().replace(/\s/g, '');
-                const value = valueSearch.toLocaleLowerCase().replace(/\s/g, '');
-                return district.includes(value);
+                let houses = await Home.find().exec();
+                listhome = houses.filter((data)=>{
+                    const district = data.adress.district.toLocaleLowerCase().replace(/\s/g, '');
+                    const value = valueSearch.toLocaleLowerCase().replace(/\s/g, '');
+                    return district.includes(value);
             })
            
         }
+        console.log(listhome.length);
         const user = await User.findById(req.userid);
         const categories = await Category.find({});
         const result ={};
         if(startIndex > 0){
             result.previous = {
-                pagePre:page + 1,
+                pagePre:page - 1,
                 limit:limit
             }
         }

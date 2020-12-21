@@ -128,6 +128,9 @@
     height: 100%;
     box-shadow: 0 0 15px 0 #D6D6D6;
 }
+.menu_left{
+   width: 95%;
+}
 .user-left-nav{
     height: 60px;
     width: 100%;
@@ -501,6 +504,10 @@
     list-style: none;
 }
 /* css content-home-reviews */
+.content-home-reviews-items a{
+   text-decoration: none;
+   color: black;
+}
 .home-reviews-item{
     text-align: center;
     background-color: #edeeef;
@@ -524,6 +531,7 @@
     margin-bottom: 20px;
     padding:10px
 }
+
 .icon-reviews{
     font-size: 30px;
     color:#16a086;

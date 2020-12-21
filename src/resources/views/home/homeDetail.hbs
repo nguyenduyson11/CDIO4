@@ -14,7 +14,7 @@
             </button>
 
             <div class="collapse navbar-collapse dropdown-0-1" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto menu_left">
                     <li class="nav-item dropdown-1 color-itme">
                         <a class="nav-link nav-link_item " href="/product" id="navbarDropdown">
                             <span>Mua</span>
@@ -33,8 +33,8 @@
                         </a>
 
                     </li>
-                    <button class="modal-btn-1">Lưu nhà</button>
-                    <button class="modal-btn-0">lưu tìm kiếm</button>
+                    <a href="/"><button class="modal-btn-1">Trang chủ</button></a>
+                    <a href="/#content-home-reviews"><button class="modal-btn-0">Liên hệ</button></a>
                     <button class="modal-btn"><a style="color:black" href="/user">Đăng ký hoặc đăng nhập</a></button>
                 </ul>
             </div>
@@ -45,7 +45,7 @@
     <!-- done menu -->
     <div class=" container-top-detail container ">
 
-        <a href="/product" class="btn btnback"><i class="fas fa-arrow-left"></i> Back to search</a>
+        <a href="/product" class="btn btnback"><i class="fas fa-arrow-left"></i> Quay lại</a>
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-sm-left text-xs-center">
                 <div class="frames">
@@ -108,7 +108,7 @@
                             <img src="/images/streetview.png" class="imgmaps" alt="">
                         </div>
                         <h6>Map View</h6>
-                        <p>Explore the area around 6 Reddy Ave.</p>
+                        <p>Bạn có thể nhìn thấy ngôi nhà của bạn</p>
                     </div>
 
                     <div class="column" data-move ="tab2">
@@ -116,29 +116,29 @@
                             <img src="/images/streetview.png" class="imgmaps" alt="">
                         </div>
                         <h6>Street View</h6>
-                        <p>Take a virtual walk around the neighborhood.</p>
+                        <p>Bắt đầu vào con đường của mình</p>
                     </div>
                     <div class="column" data-move ="tab3">
                         <div class="framesmaps" >
                             <img src="/images/streetview.png" class="imgmaps" alt="">
                         </div>
-                        <h6>School</h6>
-                        <p>Take a virtual walk around the neighborhood.</p>
+                        <h6>Trường học</h6>
+                        <p>Những ngôi trường gần bạn</p>
                     </div>
                     <div class="column" data-move ="tab4">
                         <div class="framesmaps" >
                             <img src="/images/streetview.png" class="imgmaps" alt="">
                         </div>
-                        <h6>Crime</h6>
-                        <p>Lowest crime relative to the rest of Suffolk county.</p>
+                        <h6>Cầu</h6>
+                        <p>Những cây cầu gần với ngôn nhà nhất</p>
                     </div>
 
                     <div class="column" data-move ="tab5">
                         <div class="framesmaps" >
                             <img src="/images/streetview.png" class="imgmaps" alt="">
                         </div>
-                        <h6>Commute</h6>
-                        <p>76% of residents commute by car.</p>
+                        <h6>Đi làm</h6>
+                        <p>76%  dân cư đi làm bằng ô tô.</p>
                     </div>
 
                     <div class="column" data-move ="tab6">
@@ -146,9 +146,9 @@
                             <img src="/images/streetview.png" class="imgmaps" alt="">
                         </div>
                         <h6>Shop & Eat</h6>
-                        <p>52 Restaurants
-                            11 Groceries
-                            4 Nightlife</p>
+                        <p>52 Nhà Hàng
+                            11 Cửa hàng
+                            4 Cà Phê</p>
                     </div>
 
 
@@ -163,22 +163,22 @@
                     <p>{{home.description}}</p>
                 </div><br>
                 <div class="homedetails">
-                    <h3>Home Details for 6 Reddy Ave</h3>
+                    <h3>Một số thông tin liên quan</h3>
                     <div class="row">
                         <div class="col-md-4">
-                            <p>• Single Family Home</p>
-                            <p>• Built in 1910</p>
-                            <p>• Heating: Baseboard, Gas</p>
+                            <p>Nhà ở</p>
+                            <p>Xây dựng 1910</p>
+                            <p>Máy giặt</p>
                         </div>
                         <div class="col-md-4">
                             <p>• $311/sqft</p>
-                            <p>• 19 Days on Trulia</p>
-                            <p>• Washer</p>
+                            <p>• 19 ngày trên Land</p>
+                            <p>• Dân cư đông đúc</p>
                         </div>
                         <div class="col-md-4">
-                            <p>• Lot Size: 4,791 sqft</p>
-                            <p>• Number of Rooms: 6 Rooms</p>
-                            <p>• Dryer</p>
+                            <p>• sân vườn :0 m2</p>
+                            <p>•Số lượng phòng:6</p>
+                            
                         </div>
                         <div class="col-md-4 see hiden">
                             <p>• Dryer</p>
@@ -266,12 +266,12 @@
                                         <div   div class="form-row">
                                                 <div class="col">
                                                     <input type="text" class="form-control" name="userName" id="" aria-describedby="helpId"
-                                                        placeholder="Name">
+                                                        placeholder="Tên">
                                                 </div>
                                                 <div class="col">
 
                                                     <input type="text" class="form-control" name="userPhone" id="" aria-describedby="helpId"
-                                                        placeholder="Phone">
+                                                        placeholder="Số điện thoại">
                                                 </div>
                                             </div>
                                         </div>
@@ -282,11 +282,11 @@
                                         </div>
                                         <div class="form-group">
                                             <textarea class="form-control" name="userMessage" id="userMessage"
-                                                placeholder="I am interested in 6 Reddy Ave, Boston, MA 02136" rows="3"></textarea>
+                                                placeholder="Tôi là Duy Sơn tôi muốn liên lạc với bạn" rows="3"></textarea>
                                         </div>
                                         <button class="btn btn-danger" type="submit"
                                             style="width: 100%; text-align: center;  ">
-                                            Request Info
+                                            Gửi Thông tin
                                         </button>
                             </form>
                             <div class="form-check">
@@ -359,25 +359,25 @@
         <br>
 
         <div class="tablepropety">
-            <h3>Property Taxes and Assessment</h3><br>
+            <h3>Giá cả khi thuế chấp</h3><br>
             <table class="table table-light tablepropety">
                 <thead class="thead-light">
                     <tr>
-                        <th>Year</th>
+                        <th>Năm</th>
                         <td>2020</td>
 
                     </tr>
                 </thead>
                 <thead class="thead-light">
                     <tr>
-                        <th>Tax</th>
+                        <th>Thuế</th>
                         <td>$3,854</td>
 
                     </tr>
                 </thead>
                 <thead class="thead-light">
                     <tr>
-                        <th>Assessment</th>
+                        <th>Thẩm định</th>
                         <td>$365,000</td>
 
                     </tr>
@@ -388,23 +388,23 @@
         <br>
         
         <div class="pricetrend">
-            <h3>Price Trends</h3>
-            <p>For homes in 02136</p>
+            <h3>Giá</h3>
+            <p>Nhũng ngôi nhà ở {{home.adress.district}},{{home.adress.city}}</p>
             <div class="row">
                 <div class="col-sm-1 col-sm-1 col-xs-1 col-lg-1 text-sm-left text-xs-center">
                     <i class="fas fa-shopping-cart"></i>
                 </div>
                 <div class="col-sm-5">
-                    <h6><b>$486,419</b></h6>
-                    <p>Typical home value
-                        <br> This home: $638,000 <b> 31% above </b></p>
+                    <h6><b> ${{home.price}}</b></h6>
+                    <p>Giá trị ngôi nhà
+                        <br> Tại đây:  ${{home.price}} <b> 31%  </b></p>
                 </div>
                 <div class="col-sm-1 col-sm-1 col-xs-1 col-lg-1 text-sm-left text-xs-center">
                     <i class="fas fa-shopping-cart"></i>
                 </div>
                 <div class="col-sm-5 col-sm-5 col-xs-5 col-lg-5 text-sm-left text-xs-center">
-                    <h6><b>$486,419</b></h6>
-                    <p>Typical home value <br> This home: $638,000 <b> 31% above </b></p>
+                    <h6><b> ${{home.price}}</b></h6>
+                    <p>Giá trị ngôi nhà <br> Tại dây: ${{home.price}} <b> 31% </b></p>
                 </div>
             </div>
         </div>
@@ -412,15 +412,15 @@
 
         <!-- done Price Trend -->
         <div class="neighbor">
-            <h3>Neighborhood Overview</h3>
+            <h3>Nhà khu vực lân cận</h3>
             <div class="neighborhood">
                 <a href="canh.html">
                     <img src="/images/img1.jpg" class="img" alt="">
                     <div class="title">
-                        <h5>Hyde Park</h5>
-                        <p><i class="fas fa-location-arrow"></i> 31 Homes For You <br> <i class="fas fa-tag"></i> $200k
+                        <h5>Công viên 29-3</h5>
+                        <p><i class="fas fa-location-arrow"></i> 31 ngôi nhà cho bạn <br> <i class="fas fa-tag"></i> $200k
                             - $3m <br>
-                            <a href="">See Local Highlights</a>
+                            <a href="">xem các điểm nội bật...</a>
                         </p>
 
                     </div>
@@ -432,27 +432,23 @@
 
         <div class="container whatlocal">
             <div class="column-local">
-                <h3>What Locals Say about Hyde Park</h3>
-                <p>At least 225 Trulia users voted on each feature.</p>
+                <h3>Một số đánh giả cho ngôi nhà</h3>
+                <p>ít nhất 50 người đã bình luận cho ngôi nhà này.</p>
                 <div class="row column-locals">
 
                     <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4 text-sm-left text-xs-center">
-                        <p><i class="far fa-thumbs-up"> 89%</i> &ensp; <i class="fas fa-walking"></i> There are
-                            sidewalks</p>
-                        <p><i class="far fa-thumbs-up"> 77%</i> &ensp; <i class="fas fa-lightbulb"></i> Streets are
-                            well-lit</p>
+                        <p><i class="far fa-thumbs-up"> 89%</i> &ensp; <i class="fas fa-walking"></i> Có vỉa hè</p>
+                        <p><i class="far fa-thumbs-up"> 77%</i> &ensp; <i class="fas fa-lightbulb"></i> Đường phố chiếu sáng tốt</p>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4 text-sm-left text-xs-center">
-                        <p><i class="far fa-thumbs-up"> 82%</i> &ensp; <i class="fas fa-parking"></i> Parking is easy
+                        <p><i class="far fa-thumbs-up"> 82%</i> &ensp; <i class="fas fa-parking"></i> có bãi đậu xe
                         </p>
-                        <p><i class="far fa-thumbs-up"> 72%</i> &ensp; <i class="fas fa-shopping-cart"></i> It's
-                            walkable to grocery</p>
+                        <p><i class="far fa-thumbs-up"> 72%</i> &ensp; <i class="fas fa-shopping-cart"></i> gần cửa hàng tạp hóa</p>
 
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4 text-sm-left text-xs-center">
-                        <p><i class="far fa-thumbs-up"> 78%</i> &ensp; <i class="fas fa-paw"></i> It's dog friendly </p>
-                        <p><i class="far fa-thumbs-up"> 71%</i> &ensp; <i class="fab fa-opencart"></i> Yards are
-                            well-kept</p>
+                        <p><i class="far fa-thumbs-up"> 78%</i> &ensp; <i class="fas fa-paw"></i> Có khu vui chới cho chó </p>
+                        <p><i class="far fa-thumbs-up"> 71%</i> &ensp; <i class="fab fa-opencart"></i> An ninh </p>
 
                     </div>
 
@@ -579,22 +575,16 @@
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 text-sm-left text-xs-center aboutus">
-                    <p>6 Reddy Ave, Boston, MA 02136 is a 4 bedroom, 3 bathroom, 2,050 sqft single-family home built in
-                        1910. 6 Reddy Ave is located in Hyde Park, Boston. This property is not currently available for
-                        sale. 6 Reddy Ave was last sold on Jun 27, 2019 for $323,000. The current Trulia Estimate for 6
-                        Reddy Ave is $630,384.</p>
+                    <p>{{home.description}}</p>
                     <b><small>Trulia is a registered Trademark of Zillow, Inc. and MLS listings are provided by Zillow,
                             Inc., a licensed real estate brokerage. See here for a list of our real estate
                             licenses.</small></b>
-                    <small>Zillow Group is committed to ensuring digital accessibility for individuals with
-                        disabilities. We
-                        are continuously working to improve the accessibility of our web experience for everyone, and we
-                        welcome feedback and accommodation requests. If you wish to report an issue or seek an
-                        accommodation, please contact us.</small>
+                    <small>Land cung cấp cho bạn tìm kiếm những ngôi nhà phù hợp nhất với bạn.đừng ngần ngại hãy đến với chúng tôi.Tại đây
+                        bạn cũng có thể đăng bán những ngôi nhà của bạn
+                    </small>
                     <br><br>
-                    <small>Copyright © 2020 Trulia, LLC. All rights reserved. Equal Housing Opportunity. Have a
-                        Question?
-                        Visit our Help Center to find the answer.</small>
+                    <small>Copyright © 2020 Land, LLC. Vui lòng truy cập Land.vn
+                        liên lạc 0854.083.118.</small>
                 </div>
             </div>
 
