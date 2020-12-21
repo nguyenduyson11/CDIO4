@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Home = require('../models/houses');
+const Vote = require('../models/Vote')
 const Validation = require('../validation/validations');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -7,6 +8,16 @@ const {arraytoObject} = require('../../util/convertObject');
 const multer = require('multer');
 const Category = require('../models/category');
 const request = require('request');
+const nodemailer = require("nodemailer");
+const Pusher = require("pusher");
+//pusher----------
+const pusher = new Pusher({
+    appId: "1114657",
+    key: "63990e6e49ea692758a7",
+    secret: "c207dcbfce61b0ecabb2",
+    cluster: "ap1",
+    useTLS: true
+  });
 //config upload files
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -344,6 +355,70 @@ class HomeController{
                 listHomeNew:arraytoObject(listhomenew),
                 listhome:arraytoObject(listhome)
             });
+        }
+    }
+    async sendEmailHome(req,res){
+        let home = await Home.findById(req.body.houseId);
+        let user  = await User.findById(home.user);
+        console.log(user.email);
+        
+        const newVote = {
+            area:home.adress.district,
+            points:1
+        }
+        new Vote(newVote).save()
+        .then(vote=>{
+            pusher.trigger("house-change", "house-vote", {
+                points:parseInt(vote.points),
+                district:vote.area
+              });
+
+        })
+          
+          ///---------------
+        let html =`
+        <p>Bạn có một liên hệ mới</p>
+        <h3>Chi tiết </h3>
+        <ul>
+            <li>Tên Nhà:  ${home.name}</li>
+            <li>Địa chỉ nhà: ${home.adress.street},${home.adress.district},${home.adress.city}</li>
+            <li>Tên người gửi :${req.body.userName}</li>
+            <li>Số điện thoại:${req.body.userPhone}</li>
+            <li>Email ${req.body.userEmail}</li>
+            <li>Tin nhắn :${req.body.userMessage}</li>
+        </ul>
+        `;
+        let testAccount = await nodemailer.createTestAccount();
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+         service:'gmail',
+          auth: {
+            user: 'duyson120699@gmail.com', // generated ethereal user
+            pass: 'nguyenduyson11', // generated ethereal password
+          },
+          tls:{
+              rejectUnauthorrized:false 
+          }
+        });
+      
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+          from: '"Fred Foo 👻" <foo@example.com>', // sender address
+          to: `${user.email}`, // list of receivers
+          subject: "Hello ✔", // Subject line
+          text: "Hello world?", // plain text body
+          html: html, // html body
+        });
+        
+        console.log("Message sent: %s", info.messageId);
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+      
+        // Preview only available when sending through an Ethereal account
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+        if(info){
+            res.json({
+                message:'thành công'    
+            })
         }
     }
 }

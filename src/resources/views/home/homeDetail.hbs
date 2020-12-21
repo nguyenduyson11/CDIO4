@@ -1,9 +1,9 @@
-<div class="menu menu-top-detail">
+<div class="menu  ">
     <div class="menutren">
         <nav class="navbar navbar-expand-lg navbar-light ">
             <a class="navbar-brand dropdown-0-0 " href="#">Land</a>
             <form class="form-inline " action="/product">
-                <input class="form-control dropdown-0" type="search" required name="search" placeholder="Hải Châu,Thanh Khê..."
+                <input class="form-control dropdown-0 drop" type="search" required name="search" placeholder="Hải Châu,Thanh Khê..."
                     aria-label="Search">
                 <button class="btn btn-outline-success btn-search-home " type="submit">Tìm Kiếm</button>
             </form>
@@ -41,8 +41,9 @@
         </nav>
     </div>
 </div>
+
     <!-- done menu -->
-    <div class="container container-top-detail">
+    <div class=" container-top-detail container ">
 
         <a href="/product" class="btn btnback"><i class="fas fa-arrow-left"></i> Back to search</a>
         <div class="row">
@@ -68,7 +69,7 @@
         <br>
         <!-- done img -->
         <div class="row">
-            <div class="col-md-8 col-sm-8 col-xs-8 col-lg- text-sm-left text-xs-center">
+            <div class="col-md-12 col-sm-12 col-xs-8 col-lg-8 text-sm-left text-xs-center">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6 text-sm-feft text-xs-center">
                         <h3>{{home.adress.street}}</h3>
@@ -253,49 +254,51 @@
 
             </div>
 
-            <div class="col-md-4 col-md-4 col-sm-4 col-xs-4 col-lg-4 text-sm-left text-xs-center">
+            <div class="col-md-12 col-sm-12 col-xs-4 col-lg-4 text-sm-left text-xs-center">
                 <div class="formregister">
                     <div class="container">
 
 
                         <div class="requestinfo">
-                            <div class="form-group">
-                                <div class="form-row">
-                                    <div class="col">
-                                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                                            placeholder="Name">
-                                    </div>
-                                    <div class="col">
+                            <form id="form-vote">
+                                <input type="hidden" name="houseId" value="{{home._id}}">
+                                <div class="form-group">
+                                        <div   div class="form-row">
+                                                <div class="col">
+                                                    <input type="text" class="form-control" name="userName" id="" aria-describedby="helpId"
+                                                        placeholder="Name">
+                                                </div>
+                                                <div class="col">
 
-                                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                                            placeholder="Phone">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="" id="" aria-describedby="emailHelpId"
-                                    placeholder="Email">
+                                                    <input type="text" class="form-control" name="userPhone" id="" aria-describedby="helpId"
+                                                        placeholder="Phone">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" name="userEmail" id="" aria-describedby="emailHelpId"
+                                                placeholder="Email">
 
-                            </div>
-                            <div class="form-group">
-
-                                <textarea class="form-control" name="" id=""
-                                    placeholder="I am interested in 6 Reddy Ave, Boston, MA 02136" rows="3"></textarea>
-                            </div>
-                            <button class="btn btn-danger" type="submit"
-                                style="width: 100%; text-align: center;  ">Request Info</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="userMessage" id="userMessage"
+                                                placeholder="I am interested in 6 Reddy Ave, Boston, MA 02136" rows="3"></textarea>
+                                        </div>
+                                        <button class="btn btn-danger" type="submit"
+                                            style="width: 100%; text-align: center;  ">
+                                            Request Info
+                                        </button>
+                            </form>
                             <div class="form-check">
                                 <label class="form-check-label">
                                     <input class="form-check-input" name="" id="" type="checkbox" value="checkedValue"
                                         aria-label="Text for screen reader">
-                                    <small> &eplus; &ensp; I want to talk about financing</small></label>
+                                    <small> &eplus; &ensp; Liên hệ với chủ nhà</small></label>
                             </div>
                             <div class="note">
-                                <small>By pressing Request Info, you agree that Trulia and real estate professionals may
-                                    contact you via phone/text about your inquiry, which may involve the use of
-                                    automated means. You are not required to consent as a condition of purchasing any
-                                    property, goods or services. Message/data rates may apply. You also agree to our
-                                    Terms of Use Trulia does not endorse any real estate professionals </small>
+                                <small>Đừng lo về vấn đề tài chính của bạn.Hãy nhập các thông tin sẽ trên,sẽ có người liên hệ với bạn thông qua 
+                                    địa chỉ Email hoặc số điện thoại này 
+                                     </small>
                             </div>
 
 
@@ -740,6 +743,34 @@
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 3000,
+            responsive: [
+            {
+            breakpoint: 992,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true
+            }
+            },
+            {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+            },
+            {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
         });
 
         });
@@ -750,7 +781,7 @@
         autoplaySpeed: 3000,
         responsive: [
             {
-            breakpoint: 1024,
+            breakpoint: 992,
             settings: {
                 slidesToShow: 3,
                 slidesToScroll: 1,
@@ -872,5 +903,36 @@
             zoomOffset: -1,
             accessToken: 'your.mapbox.access.token'
         }).addTo(mymap);
-         var marker = L.marker([lat,long] ).addTo(mymap)
+         var marker = L.marker([lat,long] ).addTo(mymap);
+        //fect api chart run time
+        const form = document.querySelector('#form-vote')
+        form.addEventListener('submit',(e)=>{
+            
+            const data = {
+                houseId:$('input[name=houseId]').val(),
+                userName :$('input[name=userName]').val(),
+                userPhone:$('input[name=userPhone]').val(),
+                userEmail:$('input[name=userEmail]').val(),
+                userMessage:$('#userMessage').val()
+            }
+            fetch(`http://localhost:3000/product/contact/`,{
+                method:'post',
+                body:JSON.stringify(data),
+                headers:new Headers({
+                    'Content-Type':'application/json'
+                })
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if(data.message){
+                    alert('Bạn đã gửi yêu cầu thành công')
+                }
+                else{
+                    alert('Bạn đã gửi yêu cầu thất bại')
+                }
+
+            })
+            .catch(err=>console.log(err))
+            e.preventDefault();
+        });
 </script>

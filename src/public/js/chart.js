@@ -61,11 +61,11 @@ fetch('http://localhost:3000/user/vote')
       encrypted:true
     });
     
-    var channel = pusher.subscribe('os-pull');
-    channel.bind('os-vote', function(data) {
+    var channel = pusher.subscribe('house-change');
+    channel.bind('house-vote', function(data) {
     //   alert(JSON.stringify(data.os));
          dataPoint = dataPoint.map((x)=>{
-             if(x.label == data.os){ //nếu x.label bằng với data được chọn
+             if(x.label == data.district){ //nếu x.label bằng với data được chọn
                  x.y+=data.points
                  return x;
              }
@@ -73,7 +73,8 @@ fetch('http://localhost:3000/user/vote')
                  return x;
              }
          });
-         chart.render();
+         chart1.render();
+         chart2.render();
     });
     }
 

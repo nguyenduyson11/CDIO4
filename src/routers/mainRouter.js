@@ -14,6 +14,7 @@ router.get('/product/sort',homeController.getHomeSort);
 router.get('/product',homeController.getAllHome);
 //get hoem detail
 router.get('/product/:id/detail',homeController.getHomeDetail);
+router.post('/product/contact',homeController.sendEmailHome)
 router.get('/',mainController.index);
 module.exports = router;
 
