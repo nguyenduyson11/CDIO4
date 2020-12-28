@@ -14,6 +14,7 @@ fetch('http://localhost:3000/user/vote')
         {label:'Ngũ Hành Sơn',y: voteCount['Ngũ Hành Sơn']},
         {label:'Cẩm Lệ',y: voteCount['Cẩm Lệ']},
         {label:'Hòa Vang',y: voteCount['Hòa Vang']},
+        {label:'Sơn Trà',y: voteCount['Sơn Trà']},
         {label:'Liên Chiểu',y: voteCount['Liên Chiểu']},
     ]
     const chartContainer1 = document.querySelector('#chartContainer1');

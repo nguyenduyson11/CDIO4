@@ -422,6 +422,9 @@ class HomeController{
             })
         }
     }
+    async getHomeInfo(req,res){
+        res.render('home/homeInfo');
+    }
 }
 
 module.exports = new HomeController;

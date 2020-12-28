@@ -1,7 +1,7 @@
 <div class="login-container">
         <div class="login">
             <form action="/user/login" id="form-login" method="POST">
-                <h3 class="title-login">Login</h3>
+                <h3 class="title-login">Đăng Nhập</h3>
                 {{#if err}}
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     {{err}}
@@ -20,9 +20,9 @@
                 {{/if}}
                 <input type="Email" class="input-field" name="email" placeholder="Email" required>
                 <input type="password" class="input-field" name="password" placeholder="Password" required>
-                <a href="#" class="fogot-password">fogot-password?</a>
+                <a href="#" class="fogot-password">Tìm mật khẩu?</a>
                 <button type="submit" class="btn-submit">Login</button>
-                <a href="/user/register" class="link-register">Not a member?<strong>Signup</strong></a>
+                <a href="/user/register" class="link-register">Chưa có tài khoản<strong>Đăng ký</strong></a>
             </form>
         </div>
     </div>

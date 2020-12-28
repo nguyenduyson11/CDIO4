@@ -28,15 +28,32 @@ var upload = multer({
 }).single("fileupload") 
 class SiteController{
     async index(req,res){
+        const page = (req.query.page)?parseInt(req.query.page):1;
+        const limit = 6;
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+        const result ={};
+        if(startIndex > 0){
+            result.previous = {
+                pagePre:page - 1,
+                limit:limit
+            }
+        }
+        if(endIndex < await Home.countDocuments().exec()){
+            result.next = {
+                pageNext:page + 1,
+                limit:limit
+            }
+        }
         var home;
         const admin = await User.findById(req.userid);
         if(admin.permission==1){
-            Home.find({})
+            Home.find({}).limit(6).skip(startIndex)
             .then(data=>home=data)
             .catch(err=>console.log(err))
         }
         else{
-            Home.find({user:req.userid})
+            Home.find({user:req.userid}).limit(6).skip(startIndex)
             .then(data=>home=data)
             .catch(err=>console.log(err))   
         }
@@ -45,6 +62,7 @@ class SiteController{
         .then(user=>{
             console.log(user);
              res.render('sites/user',{
+                result:result, 
                 user:user.toObject(),
                 home:arraytoObject(home)
             })
@@ -267,7 +285,7 @@ class SiteController{
     async getListUser(req,res){
         const admin = await User.findById(req.userid);
         console.log(admin);
-        const listuser = await User.find({});
+        const listuser = await User.find({permission:0});
         if(admin){
             res.render("admin/listUser",{
                 user:admin.toObject(),

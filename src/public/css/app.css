@@ -256,6 +256,24 @@
   width: 150px;
   background-color: black; }
 
+.content-table-container-page {
+  margin-top: 50px;
+  width: 100%;
+  text-align: center; }
+
+.table-container-page {
+  text-decoration: none;
+  color: black;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  transition: 0.5s;
+  margin-left: 10px; }
+
+.table-container-page:hover {
+  background-color: #3498db;
+  color: white; }
+
 .user-addHome {
   width: 80%;
   margin: 0 auto;
@@ -2426,3 +2444,281 @@ html,body{
   .frameshouse {
     width: 224px;
     height: 160px; } }
+
+.menutop {
+  background-color: white; }
+
+.overview01, .overview02 {
+  padding-top: 75px; }
+
+.block01 {
+  position: relative;
+  border-radius: 10px;
+  width: 472px;
+  height: 450px;
+  display: block;
+  text-decoration: none;
+  margin: 0 auto;
+  overflow: hidden; }
+
+.block01 .layer01 {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  transition: 0.4s;
+  background-image: url("/images/hyden-park.jpg");
+  background-size: cover; }
+
+.block01:hover .layer01 {
+  transform: scale(1.1);
+  transition: 0.4s; }
+
+.block01 .layer02 {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px; }
+
+.block01 .layer03 {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  color: white;
+  font-size: 20px;
+  line-height: 1.1;
+  z-index: 3; }
+
+.block01 .layer03 h1 {
+  color: white;
+  font-size: 38px;
+  line-height: 1.1; }
+
+.grid01 {
+  display: grid;
+  grid-template-columns: 5% 35% 5% 35%;
+  margin: 0 auto; }
+
+.grid01 .icon01 {
+  padding-top: 10px;
+  font-size: 23px;
+  color: #3b4144; }
+
+.grid01 .content01 {
+  font-size: 14px;
+  color: #3b4144; }
+
+.grid02 {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  padding: 10px 0; }
+
+.block02 {
+  width: 248px;
+  height: 135px;
+  display: block;
+  position: relative;
+  float: left;
+  border: none;
+  background-color: white; }
+
+.block02 .form02 {
+  width: 232px;
+  height: 104px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden; }
+
+.block02 .form02 .img02 {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  text-decoration: none;
+  background-size: cover; }
+
+.form02:hover .img02 {
+  transform: scale(1.1);
+  transition: 0.4s; }
+
+.block02 .content02 {
+  float: left;
+  color: black;
+  font-weight: bold;
+  font-size: 14px; }
+
+.grid03 {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20%; }
+
+.block03 {
+  width: 118px;
+  height: 158px; }
+
+.block03 .form02 {
+  width: 108px;
+  height: 104px; }
+
+.block03 .form02 .img02 {
+  width: 100%;
+  height: 100%; }
+
+.block04 button {
+  display: block;
+  padding: 9px 27px;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #464646;
+  font-weight: bold;
+  float: left;
+  background-color: white;
+  border: none; }
+
+.block04 button:hover {
+  background-color: rgba(122, 122, 122, 0.623);
+  color: #007882; }
+
+.modal-body .img03 {
+  overflow: hidden;
+  width: 350px;
+  height: 400px;
+  padding: 5px 5px;
+  background-size: cover; }
+
+.modal-body img {
+  width: 100%;
+  height: 100%; }
+
+.img04 iframe {
+  width: 100%;
+  height: 354px;
+  margin: 0 auto; }
+
+.slider01 {
+  width: 97%;
+  margin: auto; }
+
+button.slick-prev:before, button.slick-next:before {
+  color: black; }
+
+.slick-slide {
+  margin: 5px 5px;
+  transition: all ease-in-out .3s; }
+
+.slick-current {
+  opacity: 1; }
+
+.form03 .icon02 i {
+  width: 22px;
+  height: 22px; }
+
+.form03 .icon02 {
+  background-color: #E0F7F8;
+  width: 96px;
+  height: 32px;
+  text-align: center;
+  float: left;
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 0 5px;
+  color: #007882;
+  font-weight: solid; }
+
+.form03 .icon03 i {
+  width: 17.25px;
+  height: 23.75px;
+  color: darkcyan; }
+
+.form03 .icon03 {
+  width: 192px;
+  color: #464646;
+  float: left; }
+
+.form03 {
+  padding: 16px 0; }
+
+.slider01 .block02 {
+  padding-bottom: 30px; }
+
+.slider01 .content03 {
+  font-size: 14px;
+  color: black;
+  font-weight: bold; }
+
+.block05 {
+  border: none;
+  border-radius: 10px;
+  display: block;
+  width: 226px;
+  height: 343px;
+  padding: 20px 20px; }
+
+.grid04 {
+  grid-template-columns: 20% 80%;
+  display: grid; }
+
+.grid04 .content04 {
+  color: white;
+  font-size: 14px;
+  text-align: left; }
+
+.grid04 .content04 h6 {
+  margin: 0; }
+
+.block05 .content05 {
+  overflow: hidden;
+  height: 216px; }
+
+.block05 .content05 p {
+  color: white;
+  font-size: 20px;
+  text-align: left;
+  margin: 0 10px; }
+
+.grid04 i {
+  color: white;
+  font-size: 30px;
+  padding-top: 6px;
+  text-align: center; }
+
+.icon05 {
+  color: white;
+  font-size: 20px;
+  padding: 15px 15px; }
+
+.content06, .content06 a {
+  font-size: 12px;
+  color: #3B4144 !important; }
+
+.content06 a:hover {
+  font-size: 12px;
+  color: blue !important; }
+
+.content07 {
+  font-size: 12px;
+  font-weight: bold; }
+
+.w3-button {
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: white;
+  border: none;
+  border-radius: 15px; }
+
+.w3-button:hover {
+  color: #007882;
+  background-color: #3b414428; }
+
+.tab-content02 {
+  visibility: hidden;
+  width: 0;
+  height: 0; }
+
+.hiden {
+  visibility: hidden;
+  width: 0;
+  height: 0; }

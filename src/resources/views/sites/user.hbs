@@ -5,7 +5,7 @@
             <div class="user-content-table">
                 <div class="content-table-container">
                     <h1 class="content-table-container-header">
-                        LIST PRODUCTS
+                        Danh sách nhà
                     </h1>
                     <div class="content-table-container-list">
                         
@@ -38,6 +38,14 @@
                               
                             </tbody>
                           </table>
+                    </div>
+                    <div class="content-table-container-page">
+                        <a href="/user?page={{result.previous.pagePre}}" class="table-container-page"><i class="fas fa-arrow-left"></i></a>
+                        <a href="/user?page=1" class="table-container-page">1</a>
+                        <a href="/user?page=2" class="table-container-page">2</a>
+                        <span style="margin-left: 10px;">...</span>
+                        <a href="/user?page=4" class="table-container-page">4</a>
+                        <a href="/user?page={{result.next.pageNext}}" class="table-container-page"><i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
