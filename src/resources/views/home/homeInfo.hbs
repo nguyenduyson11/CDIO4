@@ -36,7 +36,21 @@
                             </li>
                             <a href="/"><button class="modal-btn-1">Trang chủ</button></a>
                             <a href="/#content-home-reviews"><button class="modal-btn-0">Liên hệ</button></a>
-                            <button class="modal-btn"><a style="color:black" href="/user">Đăng ký hoặc đăng nhập</a></button>
+                            {{#if user}}
+                                <div class="info-user-page">
+                                    <img src="/upload/{{user.image}}" alt="" width="70px" height="70px">
+                                    <div class="user_info_page-item">
+                                    <ul>
+                                        <li><a href="/user"><i class="fas fa-user"></i>Thông tin</a></li>
+                                        <li><a href="/user"><i class="fas fa-home"></i>Nhà của tôi</a></li>
+                                        <li><a href="/user/add-home"><i class="fas fa-balance-scale-right"></i>Bán nhà</a></li>
+                                        <li><a href="/user/logout"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a></li>
+                                    </ul>
+                                    </div>
+                                </div>
+                            {{else}}
+                                <button class="modal-btn"><a style="color:black" href="/user">Đăng ký hoặc đăng nhập</a></button>
+                            {{/if}}
                         </ul>
                     </div>
                 </nav>

@@ -10,6 +10,7 @@ const Category = require('../models/category');
 const request = require('request');
 const nodemailer = require("nodemailer");
 const Pusher = require("pusher");
+const user = require('../models/user');
 //pusher----------
 const pusher = new Pusher({
     appId: "1114657",
@@ -44,7 +45,6 @@ class HomeController{
         .catch(err=>next)
         Category.find({})
         .then(data=>{
-            console.log(data);
             return res.render('home/addHome',{
                 categories:arraytoObject(data),
                 user:user,
@@ -62,7 +62,6 @@ class HomeController{
                 var long =1;
                 let myAdress = `${req.body.adress},${req.body.area}`;
                 let encodeString = encodeURIComponent(myAdress);
-                console.log(myAdress);
                 const url  = `https://api.opencagedata.com/geocode/v1/json?q=${encodeString}&key=f83ea3d8638a4421ac6581cecf878d4d&pretty=1`;
                 request({url:url,json:true},(err,response)=>{
                     var data = response.body;
@@ -74,7 +73,6 @@ class HomeController{
                     const images =  arrfile.map((image)=>{
                             return image.filename;
                     });
-                    console.log(images);
                     if(images.length>0){
                         
                         const home = new Home({
@@ -276,8 +274,8 @@ class HomeController{
             })
            
         }
-        console.log(listhome.length);
         const user = await User.findById(req.userid);
+
         const categories = await Category.find({});
         const result ={};
         if(startIndex > 0){
@@ -296,7 +294,7 @@ class HomeController{
             if(categories){
                 res.render('home/viewHome',{
                     listhome:arraytoObject(listhome),
-                    user:user,
+                    user:user?user.toObject():undefined,
                     categories:arraytoObject(categories),
                     result:result,
                     count: await Home.countDocuments().exec()
@@ -335,6 +333,7 @@ class HomeController{
                     listhome:arraytoObject(listhome),
                     result:result,
                     categories:arraytoObject(categories),
+                    user: await User.findById(req.userid),
                     count: await Home.countDocuments().exec()
                 })
             }
@@ -348,12 +347,12 @@ class HomeController{
             createdAt:-1
         });
         const listhome =  await Home.find();
-        console.log(listhome)
         const home_detail = await Home.findById(home_id)
         if(home_detail){
             res.render('home/homeDetail',{
                 home:home_detail.toObject(),
                 listHomeNew:arraytoObject(listhomenew),
+                user: req.userid?await User.findById(req.userid).toObject():null,
                 listhome:arraytoObject(listhome)
             });
         }
@@ -361,7 +360,6 @@ class HomeController{
     async sendEmailHome(req,res){
         let home = await Home.findById(req.body.houseId);
         let user  = await User.findById(home.user);
-        console.log(user.email);
         
         const newVote = {
             area:home.adress.district,
@@ -423,7 +421,11 @@ class HomeController{
         }
     }
     async getHomeInfo(req,res){
-        res.render('home/homeInfo');
+        console.log(req.userid)
+        const user = await User.findById(req.userid);
+        res.render('home/homeInfo',{
+            user:user?user.toObject():undefined
+        });
     }
 }
 
