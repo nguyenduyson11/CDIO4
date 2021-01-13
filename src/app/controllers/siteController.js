@@ -67,7 +67,7 @@ class SiteController{
                 home:arraytoObject(home)
             })
         })
-        .catch(err=>res.send(err+"lỗi eooi"))
+        .catch(err=>res.send(err+"lỗi rồi"))
     }
     login(req,res){
         res.render('sites/login');
@@ -92,7 +92,7 @@ class SiteController{
          //check confirm password
          if(req.body.password != req.body.password2){
             return res.render('sites/register',{
-                err :'password incorrect'
+                err :'Nhập lại mật khẩu'
             });
          }
          //check email exits in database 
@@ -101,7 +101,7 @@ class SiteController{
          })
          if(checkemail)
             return res.render('sites/register',{
-                err :'Email already exists'
+                err :'Email đã được đăng ký'
             });
 
         //hash password
@@ -116,7 +116,7 @@ class SiteController{
        });
        user.save().then(user=>{
            res.render('./sites/login',{
-                success:'Sign Up Success'
+                success:'Đăng ký thành công'
            })
        })
        .catch(err=>console.log(err))
@@ -143,14 +143,14 @@ class SiteController{
            }
            else{
                res.render('sites/login',{
-                   err:'Incorrect password'
+                   err:'Mật khẩu không đúng'
                });
                return;
            }
         }
         else{
             res.render('sites/login',{
-                err:'Email is not registered'
+                err:'Email chưa được đăng ký'
             });
             return;
         }

@@ -348,11 +348,12 @@ class HomeController{
         });
         const listhome =  await Home.find();
         const home_detail = await Home.findById(home_id)
+        console.log(req.userid)
         if(home_detail){
             res.render('home/homeDetail',{
                 home:home_detail.toObject(),
                 listHomeNew:arraytoObject(listhomenew),
-                user: req.userid?await User.findById(req.userid).toObject():null,
+                user: req.userid?(await User.findById(req.userid)).toObject():null,
                 listhome:arraytoObject(listhome)
             });
         }
