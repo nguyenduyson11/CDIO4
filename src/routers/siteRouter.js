@@ -26,6 +26,10 @@ router.delete('/delete-home/:id',homeController.deleteHome);
 router.get('/editUser/:id',Auth.auth,siteController.getEditUser)
 //post edit user
 router.put('/editUser/:id',Auth.auth,siteController.postEditUser)
+//get forgot password
+router.get('/forgot',siteController.getForgotPassword)
+//post forgot password 
+router.post('/forgot',siteController.postForgotPassword)
 //get logout
 //get edit pasword
 router.get('/editpassword/:id',Auth.auth,siteController.getEditPassword)

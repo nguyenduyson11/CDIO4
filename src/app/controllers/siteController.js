@@ -7,6 +7,7 @@ const {arraytoObject} = require('../../util/convertObject');
 const multer = require('multer');
 const category = require('../models/category');
 const Vote = require('../models/Vote');
+const nodemailer = require("nodemailer");
 //config upload files
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -105,7 +106,7 @@ class SiteController{
             });
 
         //hash password
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(10); 
         const hashPassword = await bcrypt.hash(req.body.password, salt);
         //cretae user in database
         const user = await new User({
@@ -167,7 +168,15 @@ class SiteController{
                 })
             }    
         }) 
-    } 
+    }
+    // get forgot password
+    getForgotPassword(req,res){
+        res.render('sites/forgotPassword')
+    }
+    async postForgotPassword(req,res){
+        let user  = await User.findOne({email:req.body.email});
+        return;
+    }
     postEditUser(req,res,next){
         upload(req, res, function (err) {
             if (err instanceof multer.MulterError) {
